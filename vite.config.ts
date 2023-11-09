@@ -10,8 +10,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "elements-react",
-      fileName: (format) => `elements-react.${format}.js`,
+      name: "burgui",
+      fileName: (format) => `burgui.${format}.js`,
     },
     outDir: "lib",
     sourcemap: true,
