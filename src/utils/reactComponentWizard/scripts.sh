@@ -120,10 +120,14 @@ create_component() {
   export default meta;
   type Story = StoryObj<typeof $COMPONENT_NAME>;
 
+  const baseArgs = {
+    children: "$COMPONENT_NAME",
+  };
+
   export const Playground: Story = {
-    // args: {
-    //   ...baseArgs
-    // }
+    args: {
+      ...baseArgs
+    }
   };
   " >$COMPONENT_DIR/$COMPONENT_NAME.stories.tsx
 
