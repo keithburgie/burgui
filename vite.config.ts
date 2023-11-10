@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
@@ -38,4 +39,9 @@ export default defineConfig({
       exclude: ["/virtual:/**", "node_modules/**"],
     }),
   ],
+  test: {
+    globals: true,
+    environment: "happy-dom",
+    setupFiles: ["src/setupTest.ts"],
+  },
 });

@@ -72,7 +72,7 @@ create_component() {
   export interface ${COMPONENT_NAME}Props extends BaseProps {}
 
   const $COMPONENT_NAME = (props: ${COMPONENT_NAME}Props) => {
-    return <div>$COMPONENT_NAME</div>;
+    return <div {...props}>$COMPONENT_NAME</div>;
   };
 
   export default $COMPONENT_NAME;
@@ -130,6 +130,7 @@ create_component() {
   # --------------------------------------------
   # Create the test file
   # --------------------------------------------
+  echo import { describe, expect } from 'vitest'
   echo "import { render, screen } from '@testing-library/react';
   import $COMPONENT_NAME from './$COMPONENT_NAME';
 

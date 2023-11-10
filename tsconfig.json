@@ -23,7 +23,7 @@
     /* Linting */
     "strict": true
   },
-  "include": ["src"],
+  "include": ["src", "./setupTest.ts"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
