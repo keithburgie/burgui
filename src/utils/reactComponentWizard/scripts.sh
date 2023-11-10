@@ -71,17 +71,16 @@ create_component() {
 
   export interface ${COMPONENT_NAME}Props extends BaseProps {}
 
-  const $COMPONENT_NAME = (props: ${COMPONENT_NAME}Props) => {
+  export const $COMPONENT_NAME = (props: ${COMPONENT_NAME}Props) => {
     return <div {...props}>$COMPONENT_NAME</div>;
   };
 
-  export default $COMPONENT_NAME;
   " >$COMPONENT_DIR/$COMPONENT_NAME.tsx
 
   # --------------------------------------------
   # Create the index file
   # --------------------------------------------
-  echo "export { default } from './$COMPONENT_NAME';
+  echo "export * from './$COMPONENT_NAME';
   " >$COMPONENT_DIR/index.ts
 
   # --------------------------------------------
@@ -100,7 +99,7 @@ create_component() {
   # --------------------------------------------
   echo "import type { Meta, StoryObj } from '@storybook/react';
 
-  import $COMPONENT_NAME from './$COMPONENT_NAME';
+  import { $COMPONENT_NAME } from './$COMPONENT_NAME';
 
   // Update imports or delete if not exporting types
   // import { $EXPORTED_VARIANTS } from './$COMPONENT_NAME.types';
@@ -120,14 +119,14 @@ create_component() {
   export default meta;
   type Story = StoryObj<typeof $COMPONENT_NAME>;
 
-  const baseArgs = {
-    children: "$COMPONENT_NAME",
-  };
+  // const baseArgs = {
+  //   children: Input,
+  // };
 
   export const Playground: Story = {
-    args: {
-      ...baseArgs
-    }
+    // args: {
+    //   ...baseArgs,
+    // },
   };
   " >$COMPONENT_DIR/$COMPONENT_NAME.stories.tsx
 
@@ -136,7 +135,7 @@ create_component() {
   # --------------------------------------------
   echo import { describe, expect } from 'vitest'
   echo "import { render, screen } from '@testing-library/react';
-  import $COMPONENT_NAME from './$COMPONENT_NAME';
+  import { $COMPONENT_NAME } from './$COMPONENT_NAME';
 
   describe('$COMPONENT_NAME', () => {
     const baseClass = 'bsds-$COMPONENT_NAME_KEBAB';

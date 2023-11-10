@@ -12,6 +12,11 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
 
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["src/components/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
