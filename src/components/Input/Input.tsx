@@ -34,7 +34,7 @@ export const ControlledInput = ({
     isReadOnly: false,
     isRequired: false,
   },
-  ...rest
+  ...inputProps
 }: ControlledInputProps) => {
   const formControlContext = useFormControl();
 
@@ -49,7 +49,7 @@ export const ControlledInput = ({
         readOnly={formControlContext?.isReadOnly}
         required={formControlContext?.isRequired}
         aria-invalid={formControlContext?.isInvalid}
-        {...rest}
+        {...inputProps}
       />
       {showErrorMessage && <FormErrorMessage>{errorText}</FormErrorMessage>}
       {showHelperText && <FormHelperText>{helperText}</FormHelperText>}
