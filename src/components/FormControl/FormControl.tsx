@@ -1,36 +1,46 @@
-import { forwardRef } from "react";
+import { HTMLAttributes, forwardRef } from "react";
 import { Box, BoxProps } from "components/Box";
+import { FormControlProvider } from "./FormControlContext";
+import { useFormControl } from "./useFormControl";
 
-export interface FormControlOptions {
-  isRequired?: boolean;
+export interface FormFieldState {
   isDisabled?: boolean;
   isInvalid?: boolean;
   isReadOnly?: boolean;
+  isRequired?: boolean;
 }
 
-export interface FormControlContext extends FormControlOptions {
-  id: string;
-  label: string;
-}
-
-export interface FormControlProps
-  extends FormControlContext,
-    Omit<BoxProps, "id"> {
-  error?: string;
-}
+export interface FormControlProps extends FormFieldState, BoxProps {}
 
 export const FormControl = forwardRef<HTMLDivElement, FormControlProps>(
-  ({ children, id, label, error, ...rest }, ref) => {
+  ({ id, isDisabled, isInvalid, isReadOnly, isRequired, ...rest }, ref) => {
     return (
-      <Box ref={ref} {...rest}>
-        <label htmlFor={id}>{label}</label>
-        {children}
-        {error && (
-          <span role="alert" aria-live="assertive" className="error">
-            {error}
-          </span>
-        )}
-      </Box>
+      <FormControlProvider
+        id={id}
+        isDisabled={isDisabled}
+        isInvalid={isInvalid}
+        isReadOnly={isReadOnly}
+        isRequired={isRequired}
+      >
+        <Box ref={ref} className="form-control" {...rest} />
+      </FormControlProvider>
     );
   }
 );
+
+export const FormErrorMessage = (props: HTMLAttributes<HTMLSpanElement>) => {
+  const { isInvalid, id } = useFormControl() || {};
+  return isInvalid ? (
+    <span aria-describedby={id} aria-live="assertive" role="alert" {...props} />
+  ) : null;
+};
+
+export const FormHelperText = (props: HTMLAttributes<HTMLSpanElement>) => {
+  const { id } = useFormControl() || {};
+  return <span aria-describedby={id} aria-live="polite" {...props} />;
+};
+
+export const FormLabel = (props: HTMLAttributes<HTMLLabelElement>) => {
+  const { id } = useFormControl() || {};
+  return <label htmlFor={id} {...props} />;
+};

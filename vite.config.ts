@@ -25,6 +25,11 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      components: resolve(__dirname, "./src/components"),
+    },
+  },
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer],
