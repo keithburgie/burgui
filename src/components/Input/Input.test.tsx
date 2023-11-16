@@ -1,19 +1,19 @@
 import { render, screen } from "@testing-library/react";
-import { Box } from "./Box";
+import { Input } from "./Input";
 
-describe("Box", () => {
-  const baseClass = "bsds-box";
+describe("Input", () => {
+  const baseClass = "bsds-input";
   const testId = baseClass;
 
   it("renders without crashing", () => {
-    render(<Box data-testid={testId} />);
+    render(<Input data-testid={testId} />);
   });
 
   /**
    * Replace and add more useful tests
    */
   it("applies className correctly", () => {
-    render(<Box data-testid={testId} className={baseClass} />);
+    render(<Input data-testid={testId} className={baseClass} />);
     expect(screen.getByTestId(testId)).toHaveClass(baseClass);
   });
 });
